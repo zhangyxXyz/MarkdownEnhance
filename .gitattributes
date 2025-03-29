@@ -1,0 +1,20 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+# Force specific files to use LF
+*.md text eol=lf
+*.json text eol=lf
+*.ts text eol=lf
+*.js text eol=lf
+*.yml text eol=lf
+*.yaml text eol=lf
+
+# Binary files
+*.png binary
+*.jpg binary
+*.gif binary
+*.ico binary
+*.ttf binary
+*.eot binary
+*.woff binary
+*.woff2 binary 

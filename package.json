@@ -1,0 +1,109 @@
+{
+    "name": "markdownenhance",
+    "displayName": "Markdown Enhance",
+    "description": "Enhanced vscode markdown editor",
+    "version": "0.0.1",
+    "publisher": "seiunzhang",
+    "private": false,
+    "license": "MIT",
+    "icon": "res/img/icon.png",
+    "author": {
+        "name": "seiunzhang"
+    },
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/zhangyxXyz/MarkdownEnhance.git"
+    },
+    "engines": {
+        "vscode": "^1.60.0"
+    },
+    "categories": [
+        "Other"
+    ],
+    "keywords": [
+        "Markdown",
+        "Enhance",
+        "Dictionary"
+    ],
+    "activationEvents": [
+        "onLanguage:markdown",
+        "onLanguage:rmd",
+        "onLanguage:quarto",
+        "workspaceContains:README.md"
+    ],
+    "main": "./out/extension.js",
+    "contributes": {
+        "configuration": {
+            "type": "object",
+            "title": "Markdown Enhance",
+            "properties": {
+                "markdownenhance.icons.addTable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Show addTable icon in title bar"
+                }
+            }
+        },
+        "commands": [
+            {
+                "command": "markdownenhance.addTable",
+                "title": "Table",
+                "icon": {
+                    "dark": "./res/img/md_icon/grid_white.svg",
+                    "light": "./res/img/md_icon/grid_black.svg"
+                },
+                "category": "Markdown Enhance"
+            },
+            {
+                "command": "markdownenhance.addTableWithHeader",
+                "title": "Table With Header",
+                "icon": {
+                    "dark": "./res/img/md_icon/grid_white.svg",
+                    "light": "./res/img/md_icon/grid_black.svg"
+                },
+                "category": "Markdown Enhance"
+            }
+        ],
+        "menus": {
+            "editor/context": [
+                {
+                    "command": "markdownenhance.addTable",
+                    "when": "editorLangId == 'markdown'",
+                    "group": "2_markdown_3@1"
+                },
+                {
+                    "command": "markdownenhance.addTableWithHeader",
+                    "when": "editorLangId == 'markdown'",
+                    "group": "2_markdown_3@2"
+                }
+            ],
+            "editor/title": [
+                {
+                    "command": "markdownenhance.addTable",
+                    "when": "editorLangId == 'markdown' && config.markdownenhance.icons.addTable",
+                    "group": "navigation@9"
+                }
+            ]
+        }
+    },
+    "scripts": {
+        "vscode:prepublish": "pnpm run compile",
+        "compile": "tsc -p ./",
+        "watch": "tsc -watch -p ./",
+        "pretest": "pnpm run compile && pnpm run lint",
+        "lint": "eslint src",
+        "test": "vscode-test",
+        "package": "vsce package --out ./release/markdownenhance.vsix"
+    },
+    "devDependencies": {
+        "@types/vscode": "^1.60.0",
+        "@types/mocha": "^10.0.10",
+        "@types/node": "20.x",
+        "@typescript-eslint/eslint-plugin": "^8.28.0",
+        "@typescript-eslint/parser": "^8.28.0",
+        "eslint": "^9.23.0",
+        "typescript": "^5.8.2",
+        "@vscode/test-cli": "^0.0.10",
+        "@vscode/test-electron": "^2.4.1"
+    }
+}

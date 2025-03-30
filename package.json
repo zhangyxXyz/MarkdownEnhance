@@ -41,6 +41,351 @@
                     "type": "boolean",
                     "default": true,
                     "description": "Show addTable icon in title bar"
+                },
+                "markdownenhance.export.type": {
+                    "type": "array",
+                    "default": [
+                        "pdf"
+                    ],
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Output format: pdf, html, png, jpeg. Supports multiple output formats"
+                },
+                "markdownenhance.export.convertOnSave": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable auto-conversion on save. To apply settings, you need to restart Visual Studio Code"
+                },
+                "markdownenhance.export.convertOnSaveExclude": {
+                    "type": "array",
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Excluded filenames for convertOnSave option"
+                },
+                "markdownenhance.export.outputDirectory": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Output directory"
+                },
+                "markdownenhance.export.outputDirectoryRelativePathFile": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If markdownenhance.export.outputDirectoryRelativePathFile option is set to true, the relative path set in markdownenhance.export.outputDirectory will be interpreted relative to the file"
+                },
+                "markdownenhance.export.styles": {
+                    "type": "array",
+                    "default": [],
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "List of local stylesheet paths used by markdownenhance.export. All '\\' need to be written as '\\\\'."
+                },
+                "markdownenhance.export.stylesRelativePathFile": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "If markdownenhance.export.stylesRelativePathFile option is set to true, the relative path set in markdownenhance.export.styles will be interpreted relative to the file"
+                },
+                "markdownenhance.export.includeDefaultStyles": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable including default Markdown styles (VSCode, markdownenhance.export)"
+                },
+                "markdownenhance.export.highlight": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable syntax highlighting"
+                },
+                "markdownenhance.export.highlightStyle": {
+                    "type": [
+                        "string",
+                        "null"
+                    ],
+                    "enum": [
+                        "",
+                        "a11y-dark.css",
+                        "a11y-light.css",
+                        "agate.css",
+                        "androidstudio.css",
+                        "an-old-hope.css",
+                        "arduino-light.css",
+                        "arta.css",
+                        "ascetic.css",
+                        "atelier-cave-dark.css",
+                        "atelier-cave-light.css",
+                        "atelier-dune-dark.css",
+                        "atelier-dune-light.css",
+                        "atelier-estuary-dark.css",
+                        "atelier-estuary-light.css",
+                        "atelier-forest-dark.css",
+                        "atelier-forest-light.css",
+                        "atelier-heath-dark.css",
+                        "atelier-heath-light.css",
+                        "atelier-lakeside-dark.css",
+                        "atelier-lakeside-light.css",
+                        "atelier-plateau-dark.css",
+                        "atelier-plateau-light.css",
+                        "atelier-savanna-dark.css",
+                        "atelier-savanna-light.css",
+                        "atelier-seaside-dark.css",
+                        "atelier-seaside-light.css",
+                        "atelier-sulphurpool-dark.css",
+                        "atelier-sulphurpool-light.css",
+                        "atom-one-dark.css",
+                        "atom-one-dark-reasonable.css",
+                        "atom-one-light.css",
+                        "brown-paper.css",
+                        "codepen-embed.css",
+                        "color-brewer.css",
+                        "darcula.css",
+                        "dark.css",
+                        "darkula.css",
+                        "default.css",
+                        "docco.css",
+                        "dracula.css",
+                        "far.css",
+                        "foundation.css",
+                        "github.css",
+                        "github-gist.css",
+                        "gml.css",
+                        "googlecode.css",
+                        "gradient-dark.css",
+                        "grayscale.css",
+                        "gruvbox-dark.css",
+                        "gruvbox-light.css",
+                        "hopscotch.css",
+                        "hybrid.css",
+                        "idea.css",
+                        "ir-black.css",
+                        "isbl-editor-dark.css",
+                        "isbl-editor-light.css",
+                        "kimbie.dark.css",
+                        "kimbie.light.css",
+                        "lightfair.css",
+                        "magula.css",
+                        "mono-blue.css",
+                        "monokai.css",
+                        "monokai-sublime.css",
+                        "night-owl.css",
+                        "nord.css",
+                        "obsidian.css",
+                        "ocean.css",
+                        "paraiso-dark.css",
+                        "paraiso-light.css",
+                        "pojoaque.css",
+                        "purebasic.css",
+                        "qtcreator_dark.css",
+                        "qtcreator_light.css",
+                        "railscasts.css",
+                        "rainbow.css",
+                        "routeros.css",
+                        "school-book.css",
+                        "shades-of-purple.css",
+                        "solarized-dark.css",
+                        "solarized-light.css",
+                        "sunburst.css",
+                        "tomorrow.css",
+                        "tomorrow-night.css",
+                        "tomorrow-night-blue.css",
+                        "tomorrow-night-bright.css",
+                        "tomorrow-night-eighties.css",
+                        "vs.css",
+                        "vs2015.css",
+                        "xcode.css",
+                        "xt256.css",
+                        "zenburn.css"
+                    ],
+                    "default": "",
+                    "markdownDescription": "Set style file name. [highlight.js demo](https://highlightjs.org/static/demo/) [highlight.js/src/styles](https://github.com/highlightjs/highlight.js/tree/master/src/styles)"
+                },
+                "markdownenhance.export.breaks": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "Enable line breaks"
+                },
+                "markdownenhance.export.emoji": {
+                    "type": "boolean",
+                    "default": true,
+                    "markdownDescription": "Enable emoji. [Emoji cheat sheet](https://www.webfx.com/tools/emoji-cheat-sheet/)"
+                },
+                "markdownenhance.export.executablePath": {
+                    "type": "string",
+                    "default": "",
+                    "description": "Path to Chromium or Chrome executable, used instead of bundled Chromium."
+                },
+                "markdownenhance.export.scale": {
+                    "type": "number",
+                    "default": 1,
+                    "description": "Scale of page rendering."
+                },
+                "markdownenhance.export.displayHeaderFooter": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "PDF only. Display header and footer.",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.headerTemplate": {
+                    "type": "string",
+                    "default": "<div style=\"font-size: 9px; margin-left: 1cm;\"> <span class='title'></span></div> <div style=\"font-size: 9px; margin-left: auto; margin-right: 1cm; \">%%ISO-DATE%%</div>",
+                    "description": "PDF only. HTML template for the print header.",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.footerTemplate": {
+                    "type": "string",
+                    "default": "<div style=\"font-size: 9px; margin: 0 auto;\"> <span class='pageNumber'></span> / <span class='totalPages'></span></div>",
+                    "description": "PDF only. HTML template for the print footer.",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.printBackground": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "PDF only. Print background graphics.",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.orientation": {
+                    "type": "string",
+                    "enum": [
+                        "portrait",
+                        "landscape"
+                    ],
+                    "default": "portrait",
+                    "description": "PDF only. Paper orientation. portrait or landscape.",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.pageRanges": {
+                    "type": "string",
+                    "default": "",
+                    "description": "PDF only. Paper ranges to print, e.g., '1-5, 8, 11-13'.",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.format": {
+                    "type": "string",
+                    "enum": [
+                        "Letter",
+                        "Legal",
+                        "Tabloid",
+                        "Ledger",
+                        "A0",
+                        "A1",
+                        "A2",
+                        "A3",
+                        "A4",
+                        "A5",
+                        "A6"
+                    ],
+                    "default": "A4",
+                    "description": "PDF only. Paper format [Letter, Legal, Tabloid, Ledger, A0, A1, A2, A3, A4, A5, A6].",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.width": {
+                    "type": "string",
+                    "default": "",
+                    "description": "PDF only. Paper width, accepts values labeled with units (mm, cm, in, px). If set, overrides markdownenhance.export.format option.",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.height": {
+                    "type": "string",
+                    "default": "",
+                    "description": "PDF only. Paper height, accepts values labeled with units (mm, cm, in, px). If set, overrides markdownenhance.export.format option.",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.margin.top": {
+                    "type": "string",
+                    "default": "1.5cm",
+                    "description": "Page options. Top margin. Units: mm, cm, in, px",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.margin.bottom": {
+                    "type": "string",
+                    "default": "1cm",
+                    "description": "Page options. Bottom margin. Units: mm, cm, in, px",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.margin.right": {
+                    "type": "string",
+                    "default": "1cm",
+                    "description": "Page options. Right margin. Units: mm, cm, in, px",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.margin.left": {
+                    "type": "string",
+                    "default": "1cm",
+                    "description": "Page options. Left margin. Units: mm, cm, in, px",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.quality": {
+                    "type": "number",
+                    "default": 100,
+                    "description": "JPEG only. Image quality, between 0-100. Not applicable to PNG images."
+                },
+                "markdownenhance.export.clip.x": {
+                    "type": [
+                        "number",
+                        "null"
+                    ],
+                    "default": "",
+                    "description": "PNG and JPEG only. X-coordinate of the top-left corner of the clip area."
+                },
+                "markdownenhance.export.clip.y": {
+                    "type": [
+                        "number",
+                        "null"
+                    ],
+                    "default": "",
+                    "description": "PNG and JPEG only. Y-coordinate of the top-left corner of the clip area."
+                },
+                "markdownenhance.export.clip.width": {
+                    "type": [
+                        "number",
+                        "null"
+                    ],
+                    "default": "",
+                    "description": "PNG and JPEG only. Width of the clip area."
+                },
+                "markdownenhance.export.clip.height": {
+                    "type": [
+                        "number",
+                        "null"
+                    ],
+                    "default": "",
+                    "description": "PNG and JPEG only. Height of the clip area."
+                },
+                "markdownenhance.export.omitBackground": {
+                    "type": "boolean",
+                    "default": false,
+                    "description": "PNG and JPEG only. Hide default white background and allow capturing screenshots with transparency."
+                },
+                "markdownenhance.export.plantumlOpenMarker": {
+                    "type": "string",
+                    "default": "@startuml",
+                    "description": "Start delimiter used by the plantuml parser."
+                },
+                "markdownenhance.export.plantumlCloseMarker": {
+                    "type": "string",
+                    "default": "@enduml",
+                    "description": "End delimiter used by the plantuml parser."
+                },
+                "markdownenhance.export.plantumlServer": {
+                    "type": "string",
+                    "default": "http://www.plantuml.com/plantuml",
+                    "description": "PlantUML server"
+                },
+                "markdownenhance.export.StatusbarMessageTimeout": {
+                    "type": "number",
+                    "default": 10000,
+                    "description": "Status bar message timeout [milliseconds]"
+                },
+                "markdownenhance.export.markdown-it-include.enable": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "Enable markdown-it-include."
+                },
+                "markdownenhance.export.mermaidServer": {
+                    "type": "string",
+                    "default": "https://unpkg.com/mermaid/dist/mermaid.min.js",
+                    "description": "Mermaid server."
                 }
             }
         },
@@ -62,6 +407,42 @@
                     "light": "./res/img/md_icon/grid_black.svg"
                 },
                 "category": "Markdown Enhance"
+            },
+            {
+                "command": "markdownenhance.export.settings",
+                "title": "Export (settings.json)",
+                "group": "export",
+                "category": "Markdown Enhance.Export"
+            },
+            {
+                "command": "markdownenhance.export.pdf",
+                "title": "Export (pdf)",
+                "group": "export",
+                "category": "Markdown Enhance.Export"
+            },
+            {
+                "command": "markdownenhance.export.html",
+                "title": "Export (html)",
+                "group": "export",
+                "category": "Markdown Enhance.Export"
+            },
+            {
+                "command": "markdownenhance.export.png",
+                "title": "Export (png)",
+                "group": "export",
+                "category": "Markdown Enhance.Export"
+            },
+            {
+                "command": "markdownenhance.export.jpeg",
+                "title": "Export (jpeg)",
+                "group": "export",
+                "category": "Markdown Enhance.Export"
+            },
+            {
+                "command": "markdownenhance.export.all",
+                "title": "Export (all: pdf, html, png, jpeg)",
+                "group": "export",
+                "category": "Markdown Enhance.Export"
             }
         ],
         "menus": {
@@ -75,6 +456,11 @@
                     "command": "markdownenhance.addTableWithHeader",
                     "when": "editorLangId == 'markdown'",
                     "group": "2_markdown_3@2"
+                },
+                {
+                    "when": "resourceLangId == markdown",
+                    "submenu": "markdownenhance.export",
+                    "group": "2_markdown_3@3"
                 }
             ],
             "editor/title": [
@@ -83,14 +469,72 @@
                     "when": "editorLangId == 'markdown' && config.markdownenhance.icons.addTable",
                     "group": "navigation@9"
                 }
+            ],
+            "markdownenhance.export": [
+                {
+                    "command": "markdownenhance.export.settings",
+                    "group": "export@1"
+                },
+                {
+                    "command": "markdownenhance.export.pdf",
+                    "group": "export@2"
+                },
+                {
+                    "command": "markdownenhance.export.html",
+                    "group": "export@3"
+                },
+                {
+                    "command": "markdownenhance.export.png",
+                    "group": "export@4"
+                },
+                {
+                    "command": "markdownenhance.export.jpeg",
+                    "group": "export@5"
+                },
+                {
+                    "command": "markdownenhance.export.all",
+                    "group": "export@6"
+                }
+            ],
+            "commandPalette": [
+                {
+                    "when": "resourceLangId == markdown",
+                    "command": "markdownenhance.export.settings"
+                },
+                {
+                    "when": "resourceLangId == markdown",
+                    "command": "markdownenhance.export.pdf"
+                },
+                {
+                    "when": "resourceLangId == markdown",
+                    "command": "markdownenhance.export.html"
+                },
+                {
+                    "when": "resourceLangId == markdown",
+                    "command": "markdownenhance.export.png"
+                },
+                {
+                    "when": "resourceLangId == markdown",
+                    "command": "markdownenhance.export.jpeg"
+                },
+                {
+                    "when": "resourceLangId == markdown",
+                    "command": "markdownenhance.export.all"
+                }
             ]
-        }
+        },
+        "submenus": [
+            {
+                "id": "markdownenhance.export",
+                "label": "Markdown Export"
+            }
+        ]
     },
     "scripts": {
-        "vscode:prepublish": "pnpm run compile",
+        "vscode:prepublish": "npm run compile",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
-        "pretest": "pnpm run compile && pnpm run lint",
+        "pretest": "npm run compile && npm run lint",
         "lint": "eslint src",
         "test": "vscode-test",
         "package": "vsce package --out ./release/markdownenhance.vsix"
@@ -105,5 +549,22 @@
         "typescript": "^5.8.2",
         "@vscode/test-cli": "^0.0.10",
         "@vscode/test-electron": "^2.4.1"
+    },
+    "dependencies": {
+        "cheerio": "^0.20.0",
+        "emoji-images": "^0.1.1",
+        "gray-matter": "^4.0.2",
+        "highlight.js": "^9.18.1",
+        "markdown-it": "^10.0.0",
+        "markdown-it-checkbox": "^1.1.0",
+        "markdown-it-container": "^2.0.0",
+        "markdown-it-emoji": "^1.4.0",
+        "markdown-it-include": "^1.1.0",
+        "markdown-it-named-headers": "0.0.4",
+        "markdown-it-plantuml": "^1.4.1",
+        "mkdirp": "^1.0.3",
+        "mustache": "^4.0.1",
+        "puppeteer-core": "^2.1.1",
+        "rimraf": "^3.0.2"
     }
 }

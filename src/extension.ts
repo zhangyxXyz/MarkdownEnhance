@@ -2,7 +2,8 @@
 // Import the module and reference it with the alias vscode in your code below
 import * as vscode from 'vscode';
 import * as mdShortcuts from './markdown/shortcuts/commands';
-import * as dictionary from './markdown/extended/dictcompletion';
+import * as mdExport from './markdown/export';
+import * as mdDictionary from './markdown/extended/dictcompletion';
 
 // This method is called when your extension is activated
 // Your extension is activated the very first time the command is executed
@@ -15,7 +16,10 @@ export function activate(context: vscode.ExtensionContext) {
 	mdShortcuts.register(context);
 
 	// Activate dictionary completion functionality
-	dictionary.activate(context);
+	mdDictionary.activate(context);
+
+	// Activate markdown export functionality
+	mdExport.activate(context);
 
 	// Set language configuration for Markdown, used for dictionary completion
 	vscode.languages.setLanguageConfiguration('markdown', {

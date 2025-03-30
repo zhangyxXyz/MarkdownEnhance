@@ -2,7 +2,7 @@
     "name": "markdownenhance",
     "displayName": "Markdown Enhance",
     "description": "Enhanced vscode markdown editor",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "publisher": "seiunzhang",
     "private": false,
     "license": "MIT",
@@ -384,8 +384,13 @@
                 },
                 "markdownenhance.export.mermaidServer": {
                     "type": "string",
-                    "default": "https://unpkg.com/mermaid/dist/mermaid.min.js",
+                    "default": "https://unpkg.com/mermaid",
                     "description": "Mermaid server."
+                },
+                "markdownenhance.export.katexServer": {
+                    "type": "string",
+                    "default": "https://unpkg.com/katex",
+                    "description": "URL to the KaTeX CDN server. Used for LaTeX math expressions rendering."
                 }
             }
         },
@@ -531,7 +536,8 @@
         ]
     },
     "scripts": {
-        "vscode:prepublish": "npm run compile",
+        "vscode:prepublish": "npm run lint && npm run compile && npm run cleanup",
+        "cleanup": "node ./out/compile/cleanup.js",
         "compile": "tsc -p ./",
         "watch": "tsc -watch -p ./",
         "pretest": "npm run compile && npm run lint",
@@ -540,15 +546,17 @@
         "package": "vsce package --out ./release/markdownenhance.vsix"
     },
     "devDependencies": {
+        "@types/glob": "^7.2.0",
+        "@types/mocha": "^9.1.1",
+        "@types/node": "16.x",
         "@types/vscode": "^1.60.0",
-        "@types/mocha": "^10.0.10",
-        "@types/node": "20.x",
-        "@typescript-eslint/eslint-plugin": "^8.28.0",
-        "@typescript-eslint/parser": "^8.28.0",
-        "eslint": "^9.23.0",
-        "typescript": "^5.8.2",
-        "@vscode/test-cli": "^0.0.10",
-        "@vscode/test-electron": "^2.4.1"
+        "@typescript-eslint/eslint-plugin": "^5.30.0",
+        "@typescript-eslint/parser": "^5.30.0",
+        "eslint": "^8.18.0",
+        "glob": "^8.0.3",
+        "mocha": "^10.0.0",
+        "removeNPMAbsolutePaths": "^2.0.0",
+        "typescript": "^4.7.4"
     },
     "dependencies": {
         "cheerio": "^0.20.0",
@@ -560,6 +568,7 @@
         "markdown-it-container": "^2.0.0",
         "markdown-it-emoji": "^1.4.0",
         "markdown-it-include": "^1.1.0",
+        "markdown-it-katex": "^2.0.3",
         "markdown-it-named-headers": "0.0.4",
         "markdown-it-plantuml": "^1.4.1",
         "mkdirp": "^1.0.3",

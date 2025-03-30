@@ -209,7 +209,7 @@ function installChromium(): void {
     const puppeteer = require('puppeteer-core');
     const browserFetcher = puppeteer.createBrowserFetcher();
     
-    // 修复路径问题 - 使用扩展目录下的node_modules
+    // Fix path issues - use node_modules from extension directory
     const extensionPath = vscode.extensions.getExtension('seiunzhang.markdownenhance')?.extensionPath || '';
     const packagePath = path.join(extensionPath, 'node_modules', 'puppeteer-core', 'package.json');
     
@@ -218,8 +218,8 @@ function installChromium(): void {
       revision = require(packagePath).puppeteer.chromium_revision;
     } catch (error) {
       console.log('Error loading puppeteer package.json, using hardcoded revision');
-      // 作为备用，使用硬编码的版本号
-      revision = '982053';  // 当前puppeteer-core 2.1.1使用的Chromium版本
+      // As a fallback, use hardcoded version number
+      revision = '982053';  // Current Chromium version used by puppeteer-core 2.1.1
     }
     
     const revisionInfo = browserFetcher.revisionInfo(revision);
@@ -447,8 +447,30 @@ export async function makeHtml(data: string, uri: vscode.Uri): Promise<string> {
     const template = readFile(templatePath) as string;
 
     // Read mermaid JavaScript
-    const mermaidServer = vscode.workspace.getConfiguration('markdownenhance.export')['mermaidServer'] || '';
-    const mermaid = '<script src="' + mermaidServer + '"></script>';
+    const mermaidServer = vscode.workspace.getConfiguration('markdownenhance.export')['mermaidServer'] || 'https://unpkg.com/mermaid';
+    const mermaid = '<script src="' + mermaidServer + '/dist/mermaid.min.js"></script>';
+    
+    // Read KaTeX resources from configuration
+    const katexServer = vscode.workspace.getConfiguration('markdownenhance.export')['katexServer'] || 'https://unpkg.com/katex';
+    const katexCss = '<link rel="stylesheet" href="' + katexServer + '/dist/katex.min.css">';
+    const katexJs = '<script src="' + katexServer + '/dist/katex.min.js"></script>';
+    const autoRenderJs = '<script src="' + katexServer + '/dist/contrib/auto-render.min.js"></script>';
+    const katexInit = `<script>
+      document.addEventListener("DOMContentLoaded", function() {
+        renderMathInElement(document.body, {
+          delimiters: [
+            {left: "$$", right: "$$", display: true},
+            {left: "$", right: "$", display: false},
+            {left: "\\\\(", right: "\\\\)", display: false},
+            {left: "\\\\[", right: "\\\\]", display: true}
+          ],
+          throwOnError: false
+        });
+      });
+    </script>`;
+    
+    // Combine all KaTeX resources
+    const katex = katexCss + katexJs + autoRenderJs + katexInit;
 
     // Compile template
     const mustache = require('mustache');
@@ -456,7 +478,8 @@ export async function makeHtml(data: string, uri: vscode.Uri): Promise<string> {
       title: title,
       style: style,
       content: data,
-      mermaid: mermaid
+      mermaid: mermaid,
+      katex: katex
     };
     
     return mustache.render(template, view);
@@ -536,6 +559,11 @@ export async function convertMarkdownToHtml(filename: string, type: string, text
           // Special handling for mermaid charts
           if (lang && lang.match(/\bmermaid\b/i)) {
             return `<div class="mermaid">${str}</div>`;
+          }
+          
+          // Special handling for LaTeX math blocks
+          if (lang && lang.match(/\bmath\b/i)) {
+            return `<div class="math">${str}</div>`;
           }
 
           // Syntax highlighting processing
@@ -636,9 +664,12 @@ export async function convertMarkdownToHtml(filename: string, type: string, text
       const plantumlOptions = {
         openMarker: matterParts.data.plantumlOpenMarker || vscode.workspace.getConfiguration('markdownenhance.export')['plantumlOpenMarker'] || '@startuml',
         closeMarker: matterParts.data.plantumlCloseMarker || vscode.workspace.getConfiguration('markdownenhance.export')['plantumlCloseMarker'] || '@enduml',
-        server: vscode.workspace.getConfiguration('markdownenhance.export')['plantumlServer'] || ''
+        server: vscode.workspace.getConfiguration('markdownenhance.export')['plantumlServer'] || 'http://www.plantuml.com/plantuml'
       };
       md.use(require('markdown-it-plantuml'), plantumlOptions);
+      
+      // LaTeX math support
+      md.use(require('markdown-it-katex'));
 
       // File inclusion support
       if (vscode.workspace.getConfiguration('markdownenhance.export')['markdown-it-include']['enable']) {

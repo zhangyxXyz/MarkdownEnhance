@@ -60,7 +60,7 @@ export async function exportImage(data: string, filename: string, type: string, 
       // Generate screenshot options
       let screenshotOptions;
       if (clip_x_option !== null && clip_y_option !== null && clip_width_option !== null && clip_height_option !== null) {
-        // 使用指定的裁剪区域
+        // Use specified clip area
         screenshotOptions = {
           path: exportFilename,
           type: type,
@@ -75,15 +75,15 @@ export async function exportImage(data: string, filename: string, type: string, 
           omitBackground: vscode.workspace.getConfiguration('markdownenhance.export')['omitBackground'],
         };
       } else {
-        // 消除多余空白：获取实际内容的尺寸
+        // Remove excess whitespace: get actual content dimensions
         const contentSize = await page.evaluate(() => {
-          // 这段代码在浏览器中执行，所以可以使用 document
-          // 获取文档中所有元素
+          // This code runs in the browser, so we can use document
+          // Get all elements in the document
           const elements = document.querySelectorAll('body *');
           let maxHeight = 0;
           let maxWidth = 0;
           
-          // 计算所有元素中的最大高度和宽度
+          // Calculate the maximum height and width from all elements
           elements.forEach((el: Element) => {
             const rect = el.getBoundingClientRect();
             const bottom = rect.top + rect.height;
@@ -97,21 +97,21 @@ export async function exportImage(data: string, filename: string, type: string, 
             }
           });
           
-          // 确保至少有最小宽度和高度（页面内容可能很少）
+          // Ensure minimum width and height (page content might be sparse)
           maxWidth = Math.max(maxWidth, document.body.clientWidth);
           maxHeight = Math.max(maxHeight, document.body.clientHeight);
           
-          // 添加一些底部填充（可选，防止内容过于贴近底部）
+          // Add some bottom padding (optional, prevents content from being too close to bottom)
           maxHeight += 40;
           
-          // 确保返回的是整数值
+          // Ensure returned values are integers
           return { 
             width: Math.ceil(maxWidth), 
             height: Math.ceil(maxHeight) 
           };
         });
         
-        // 使用实际内容尺寸设置视口大小
+        // Set viewport size to actual content dimensions
         await page.setViewport({
           width: Math.ceil(contentSize.width),
           height: Math.ceil(contentSize.height),
@@ -122,7 +122,7 @@ export async function exportImage(data: string, filename: string, type: string, 
           path: exportFilename,
           type: type,
           quality: quality_option,
-          fullPage: false,  // 不再使用全页模式，使用自定义尺寸
+          fullPage: false,  // Don't use full page mode, use custom dimensions instead
           omitBackground: vscode.workspace.getConfiguration('markdownenhance.export')['omitBackground'],
         };
       }

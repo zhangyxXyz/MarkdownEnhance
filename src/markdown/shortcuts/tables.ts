@@ -58,4 +58,4 @@ function convertToTableWithHeader(text: string): string {
     const headerLine = firstRow.replace(/[^\|]/gi, "-");
 
     return firstRow + "\n" + headerLine + textAsTable.substring(firstRow.length);
-} 
+}

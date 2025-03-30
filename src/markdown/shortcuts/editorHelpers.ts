@@ -111,7 +111,7 @@ function getBlockSelection(): vscode.Selection {
     }
 
     return new vscode.Selection(
-        selection.start.with(undefined, 0), 
+        selection.start.with(undefined, 0),
         selection.end.with(selection.end.line + 1, 0)
     );
 }
@@ -128,4 +128,4 @@ function isSelectionMatch(selection: vscode.Selection, startPattern: string | Re
     }
 
     return text.startsWith(startPattern) && text.endsWith(endPattern!);
-} 
+}

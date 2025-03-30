@@ -12,7 +12,7 @@ export function activate(context: vscode.ExtensionContext) {
     // Copy dictionary file to extension directory
     const targetDictionaryPath = context.asAbsolutePath('dictionary.txt');
     const sourceDictionaryPath = 'E:/IDE/VSCode/PluginsDev/Code-Snippet/dictionary.txt';
-    
+
     try {
         if (!fs.existsSync(targetDictionaryPath)) {
             fs.copyFileSync(sourceDictionaryPath, targetDictionaryPath);
@@ -60,14 +60,14 @@ class DictionaryCompletionItemProvider implements vscode.CompletionItemProvider 
     }
 
     provideCompletionItems(
-        document: vscode.TextDocument, 
+        document: vscode.TextDocument,
         position: vscode.Position,
         token: vscode.CancellationToken
     ): Thenable<vscode.CompletionItem[]> | vscode.CompletionItem[] {
         const textBefore = document.lineAt(position.line).text.substring(0, position.character);
 
         let firstLetter: string;
-        
+
         switch (this.fileType) {
             case "markdown":
                 const cleanText = textBefore.replace(/\W/g, ' ');
@@ -97,4 +97,4 @@ class DictionaryCompletionItemProvider implements vscode.CompletionItemProvider 
             return Promise.resolve(completions);
         }
     }
-} 
+}

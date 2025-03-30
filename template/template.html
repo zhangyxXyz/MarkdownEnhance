@@ -5,6 +5,70 @@
     <title>{{{title}}}</title>
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8" />
     {{{style}}} {{{mermaid}}} {{{katex}}}
+    <!-- Additional inline styles to prevent formula page breaks -->
+    <style>
+        /* Provide additional global page break protection */
+        .katex-display,
+        .math,
+        .katex,
+        span.katex,
+        span.math,
+        div.math,
+        table,
+        figure,
+        pre {
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            -webkit-column-break-inside: avoid !important;
+            -moz-column-break-inside: avoid !important;
+            /* Critical CSS to prevent formula truncation */
+            position: relative !important;
+            overflow: visible !important;
+            max-height: none !important;
+            transform: translateZ(0) !important;
+        }
+
+        /* Additional wrapper styles */
+        .math-wrapper {
+            display: block;
+            page-break-inside: avoid !important;
+            break-inside: avoid !important;
+            margin: 1em 0;
+        }
+
+        /* Ensure page height is sufficient to contain all content */
+        html,
+        body {
+            min-height: 100%;
+            height: auto !important;
+            padding-bottom: 10px;
+            overflow: visible !important;
+        }
+
+        /* Fix KaTeX container display issues */
+        .katex,
+        .katex-display {
+            display: block !important;
+            overflow: visible !important;
+            max-width: 100% !important;
+        }
+
+        /* Fix KaTeX internal element styles */
+        .katex .katex-html {
+            position: relative !important;
+            overflow: visible !important;
+            white-space: normal !important;
+        }
+
+        /* Specific fixes for fractions and large formulas */
+        .katex .mfrac,
+        .katex .mord,
+        .katex .delimsizing,
+        .katex .sizing {
+            position: relative !important;
+            overflow: visible !important;
+        }
+    </style>
 </head>
 
 <body>
@@ -16,6 +80,45 @@
                     ? 'dark'
                     : 'default',
         })
+
+        // Adjust page height after formula rendering is complete
+        document.addEventListener("DOMContentLoaded", function () {
+            // More comprehensive fix for formula rendering issues
+            function fixFormulas() {
+                // Get all formula elements
+                var mathElements = document.querySelectorAll('.katex-display, .katex, .math');
+                if (mathElements.length > 0) {
+                    console.log("Found " + mathElements.length + " formula elements, ensuring full display");
+
+                    // Process each formula element
+                    mathElements.forEach(function (element) {
+                        // Ensure element and parent elements have overflow:visible
+                        element.style.overflow = 'visible';
+                        element.style.position = 'relative';
+
+                        // Get actual element height
+                        var height = element.scrollHeight;
+                        // Set minimum height to ensure full display
+                        element.style.minHeight = height + 'px';
+
+                        // Apply necessary styles to parent element
+                        var parent = element.parentElement;
+                        if (parent) {
+                            parent.style.overflow = 'visible';
+                            parent.style.pageBreakInside = 'avoid';
+                            parent.style.breakInside = 'avoid';
+                        }
+                    });
+
+                    // Find position of last formula element and set page height
+                    var lastMathElement = mathElements[mathElements.length - 1];
+                    var rect = lastMathElement.getBoundingClientRect();
+                    var bottomPosition = rect.bottom + window.scrollY;
+                    document.body.style.minHeight = bottomPosition + 'px';
+                }
+            }
+            setTimeout(fixFormulas, 500);
+        });
     </script>
     {{{content}}}
 </body>

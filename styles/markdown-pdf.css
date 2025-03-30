@@ -47,3 +47,62 @@ code {
 .page {
     page-break-after: always;
 }
+
+/* Prevent page breaks inside math formulas and other important elements
+-------------------------------------------------------- */
+.katex-display,
+.math,
+.katex,
+span.katex,
+span.math,
+div.math,
+table,
+figure,
+pre {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+    -webkit-column-break-inside: avoid !important;
+    -moz-column-break-inside: avoid !important;
+    orphans: 4 !important;
+    widows: 4 !important;
+}
+
+.katex-display,
+.math {
+    margin: 2em 0 !important;
+    overflow-x: auto !important;
+    overflow-y: hidden !important;
+    position: relative !important;
+    box-sizing: border-box !important;
+    min-height: 2.5em !important;
+}
+
+/* Make sure inline math doesn't break */
+.katex,
+span.katex,
+span.math {
+    white-space: nowrap !important;
+    display: inline-block !important;
+}
+
+/* Add a small margin before elements that should stay together */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    page-break-after: avoid;
+    break-after: avoid;
+}
+
+/* Keep heading with at least 2 lines of content */
+h1+p,
+h2+p,
+h3+p,
+h4+p,
+h5+p,
+h6+p {
+    page-break-before: avoid;
+    break-before: avoid;
+}

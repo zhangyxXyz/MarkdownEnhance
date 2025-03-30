@@ -2,7 +2,7 @@
     "name": "markdownenhance",
     "displayName": "Markdown Enhance",
     "description": "Enhanced vscode markdown editor",
-    "version": "0.0.2",
+    "version": "0.0.4",
     "publisher": "seiunzhang",
     "private": false,
     "license": "MIT",
@@ -313,6 +313,18 @@
                     "type": "string",
                     "default": "1cm",
                     "description": "Page options. Left margin. Units: mm, cm, in, px",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.preventFormulaBreak": {
+                    "type": "boolean",
+                    "default": true,
+                    "description": "PDF only. Prevent page breaks inside math formulas, tables and code blocks.",
+                    "scope": "resource"
+                },
+                "markdownenhance.export.renderTimeout": {
+                    "type": "number",
+                    "default": 1000,
+                    "description": "Time in milliseconds to wait for math formulas to render before exporting PDF.",
                     "scope": "resource"
                 },
                 "markdownenhance.export.quality": {
